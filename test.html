@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroller.js</title>
+
+    <link rel="stylesheet" href="scroller.css">
+
+    <style type="text/css">
+        .content {
+            overflow: hidden;
+            width: 60%;
+            padding: 25px;
+            border: 1px solid gray;
+        }
+
+            .content_vertical {
+                width: 150px;
+                height: 300px;
+            }
+
+
+        .wrap {
+            overflow: hidden;
+        }
+
+        .item {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 0 0 0 20px;
+            border: 1px solid gray;
+        }
+
+            .item:first-child {
+                margin-left: 0;
+            }
+
+            .content_vertical .item {
+                float: none;
+                width: 130px;
+                margin: 20px 0 0 0;
+            }
+
+                .content_vertical .item:first-child {
+                    margin-top: 0;
+                }
+
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="wrap">
+            <div class="item"></div>
+            <div class="item" style="width: 150px;"></div>
+            <div class="item" style="width: 50px;"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item" style="width: 75px;"></div>
+            <div class="item"></div>
+            <div class="item" style="width: 350px;"></div>
+        </div>
+    </div>
+
+    <div class="content content_vertical">
+        <div class="wrap">
+            <div class="item" style="height: 150px;"></div>
+            <div class="item" style="height: 150px;"></div>
+            <div class="item"></div>
+            <div class="item" style="height: 75px;"></div>
+            <div class="item" style="height: 75px;"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="scroller.js"></script>
+
+    <script>
+        $('.content').each(function() {
+            $(this).scroller({ vertical: $(this).hasClass('content_vertical') });
+        });
+    </script>
+</body>
+</html>
