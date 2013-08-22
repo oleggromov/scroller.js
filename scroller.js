@@ -20,7 +20,6 @@
     // objects're created for each instance
     var Scroller = function(node, options) {
         this.options = $.extend({}, defaults, options);
-        console.debug(this.options);
 
         // content dom references
         this.parent = $(node);
@@ -175,8 +174,6 @@
 
     // initing only once
     $.fn.scroller = function(options) {
-        console.debug(options);
-
         return this.each(function() {
             if ($(this).data('scroller')) return;
 
