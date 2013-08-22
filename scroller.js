@@ -1,3 +1,9 @@
+/*!
+ * Scroller.js
+ * Copyright (c) 2013 Oleg Gromov
+ * https://github.com/oleggromov/scroller.js/blob/master/LICENSE
+ */
+
 ;(function($) {
     'use strict';
 
