@@ -34,26 +34,27 @@
     transition: opacity 0.3s ease, left 0, top 0;
 }
 
-    .scroller_vertical .scroller__scroll {
-        position: absolute;
-        left: auto;
-        right: 3px;
-        top: 0;
-        margin: 0;
-        height: 100%;
-        border-bottom: none;
-        border-left: 1px solid #eee;
-    }
-
     .scroller__scroll_visible {
         left: 0;
         top: 0;
         opacity: 1;
     }
 
-        .scroller_vertical .scroller__scroll_visible {
-            right: 3px;
-        }
+.scroller_vertical .scroller__scroll {
+    position: absolute;
+    left: auto;
+    right: -10000px;
+    top: -10000px;
+    margin: 0;
+    height: 100%;
+    border-bottom: none;
+    border-left: 1px solid #eee;
+}
+
+    .scroller_vertical .scroller__scroll_visible {
+        top: 0;
+        right: 3px;
+    }
 
 
 .scroller__handle {

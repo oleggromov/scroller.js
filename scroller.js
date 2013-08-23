@@ -53,7 +53,7 @@
     Scroller.prototype = {
         // event handlers
         startDragging: function(e) {
-            if (this.dragging) return;
+            if (!this.enabled || this.dragging) return;
 
             this.dragging = true;
             this.dragStart = this.options.vertical ? e.clientY : e.clientX;
@@ -61,7 +61,7 @@
 
 
         stopDragging: function() {
-            if (!this.dragging) return;
+            if (!this.enabled || !this.dragging) return;
 
             this.dragging = false;
             this.handleOffsetPrev = this.handleOffset;
@@ -69,7 +69,7 @@
 
 
         drag: function(e) {
-            if (!this.dragging) return;
+            if (!this.enabled || !this.dragging) return;
 
             this.handleOffset = this.getHandleOffset(this.options.vertical ? e.clientY : e.clientX);
 
@@ -82,7 +82,10 @@
         },
 
 
+        // TODO: refactoring
         dragByWheel: function(e) {
+            if (!this.enabled) return;
+
             var delta = e.originalEvent.deltaY || -e.originalEvent.wheelDeltaY || -e.originalEvent.wheelDelta;
             var direction = delta < 0 ? -1 : 1;
 
@@ -108,12 +111,14 @@
             this.handleOffset = 0;
             this.handleOffsetPrev = 0;
             this.dragging = false;
+            this.enabled = false;
             // resetting position
             this.move(0);
 
             if (self >= child) {
                 this.scroll.removeClass('scroller__scroll_visible');
             } else {
+                this.enabled = true;
                 this.scroll.addClass('scroller__scroll_visible');
                 // sizing handle
                 this.handleSize = this.getPercent(self, this.options.vertical ? this.child.outerHeight() : this.child.outerWidth());
@@ -166,7 +171,7 @@
         getMaxMargin: function(prevItem, item) {
             return Math.max(
                 parseInt(item.css('margin-top'), 10),
-                parseInt(prevItem.css('margin-bottom'), 10)
+                parseInt(prevItem.css('margin-bottom') || 0, 10)
             );
         },
     };
